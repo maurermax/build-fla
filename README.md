@@ -7,7 +7,7 @@ const buildFla = require('build-fla');
 buildFla({
 	flaPath: "file:///C|/Users/user/input.fla",
 	outputPath: "file:///C|/Users/user/input.fla"
-}, function() {
+}, function(err, output) {
 	console.log('done building fla');
 });
 ```
@@ -19,3 +19,7 @@ buildFla({
 
 ### optional
 * *flashExecutablePath:* the path to the flash executable on your system (needed to build the flash movie)
+
+## return values
+* *err:* will contain any compiler errors mentioned
+* *output:* will contain stuff written to the output window during build
