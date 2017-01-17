@@ -25,10 +25,16 @@ module.exports = function(config, cb) {
 	s += 'fl.quit();\n';
 	fs.writeFile(config.jflTmpName, s);
 	exec(config.flashExecutablePath + " " + config.jflTmpName, function(error, stdout, stderr) {
-        var output = fs.readFileSync(config.logOutputFileName).toString();
-        var error = fs.readFileSync(config.logErrorFileName).toString();
-        fs.unlinkSync(config.logOutputFileName);
-        fs.unlinkSync(config.logErrorFileName);
+        var output = null;
+        if (fs.existsSync(config.logOutputFileName)) {
+            output = fs.readFileSync(config.logOutputFileName).toString().trim();
+            fs.unlinkSync(config.logOutputFileName);
+        }
+        var error = null;
+        if (fs.existsSync(config.logErrorFileName)) {
+            error = fs.readFileSync(config.logErrorFileName).toString().trim();
+            fs.unlinkSync(config.logErrorFileName);
+		}
 		fs.unlinkSync(config.jflTmpName);
 		return cb(error, output);
 	});
