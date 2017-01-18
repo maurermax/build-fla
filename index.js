@@ -27,12 +27,12 @@ module.exports = function(config, cb) {
 	exec(config.flashExecutablePath + " " + config.jflTmpName, function(error, stdout, stderr) {
         var output = null;
         if (fs.existsSync(config.logOutputFileName)) {
-            output = fs.readFileSync(config.logOutputFileName).toString().trim();
+            output = fs.readFileSync(config.logOutputFileName).toString().replace(/^\s+|\s+$/g, '');
             fs.unlinkSync(config.logOutputFileName);
         }
         var error = null;
         if (fs.existsSync(config.logErrorFileName)) {
-            error = fs.readFileSync(config.logErrorFileName).toString().trim();
+            error = fs.readFileSync(config.logErrorFileName).toString().replace(/^\s+|\s+$/g, '');
             fs.unlinkSync(config.logErrorFileName);
 		}
 		fs.unlinkSync(config.jflTmpName);

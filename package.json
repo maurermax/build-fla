@@ -1,6 +1,6 @@
 {
   "name": "build-fla",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Node module for building swf from SWF from .fla files programatically. Adobe Flash that is capable of JSFL is needed.",
   "main": "index.js",
   "scripts": {
